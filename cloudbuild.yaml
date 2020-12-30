@@ -23,7 +23,7 @@ steps:
     - '--platform'
     - 'managed'
     - '--allow-unauthenticated'
-    - '--set-env-vars=COVID_ENDPOINT=https://covid19.th-stat.com'
+    - '--set-env-vars=COVID_ENDPOINT=${_COVID_ENDPOINT}'
 
 # images:
 #  - 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA'
