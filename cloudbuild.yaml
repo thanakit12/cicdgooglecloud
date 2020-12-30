@@ -10,7 +10,23 @@ steps:
     args: ['push' , 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA']
 
 #This Step deploy to google cloud run
-  - name : gcr.io/cloud-builders/gcloud
-    args: ['run','deploy','firstservices','--image','gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA','--region',
-           'asia-southeast1' , '--platform' , 'managed' , '--allow-unauthenticated']
-      
+  # - name : gcr.io/cloud-builders/gcloud
+  #   args: ['run','deploy','firstservices','--image','gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA','--region',
+  #          'asia-southeast1' , '--platform' , 'managed' , '--allow-unauthenticated']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+    - 'run'
+    - 'deploy'
+    - 'firstservices'
+    - '--image'
+    - 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA'
+    - '--region'
+    - 'asia-southeast1'
+    - '--platform'
+    - 'managed'
+    - '--allow-unauthenticated'
+
+# images:
+#  - 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA'
