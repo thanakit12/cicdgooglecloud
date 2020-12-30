@@ -10,10 +10,6 @@ steps:
     args: ['push' , 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA']
 
 #This Step deploy to google cloud run
-  # - name : gcr.io/cloud-builders/gcloud
-  #   args: ['run','deploy','firstservices','--image','gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA','--region',
-  #          'asia-southeast1' , '--platform' , 'managed' , '--allow-unauthenticated']
-
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -27,9 +23,8 @@ steps:
     - '--platform'
     - 'managed'
     - '--allow-unauthenticated'
-    env:
-      - PORT = 8080
-      - COVID_ENDPOINT = https://covid19.th-stat.com
+    - '--set-env-vars=PORT=8080'
+    - '--set-env-vars=COVID_ENDPOINT=https://covid19.th-stat.com'
 
 # images:
 #  - 'gcr.io/$PROJECT_ID/$REPO_NAME:$BRANCH_NAME-$SHORT_SHA'
